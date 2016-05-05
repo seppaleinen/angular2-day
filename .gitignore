@@ -1,0 +1,26 @@
+# Ignore Intellij files
+*.iml
+*.ipr
+/.idea
+
+# Ignore artifacts from TS compilation
+*.js
+*.js.map
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Ignore compiled results
+dist/
+
+# Ignore dependency directories
+node_modules/
+typings/
+
+# Ignore optional npm cache directory
+.npm
+
+# Ignore optional REPL history
+.node_repl_history
