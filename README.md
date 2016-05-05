@@ -15,8 +15,8 @@ In addition an alert pops up that says _Yes typescript compilation works as well
 
 If you see all this everything is working as expected and yoa are good to go for the subsequent labs.
 
-Background
-----------
+Details
+-------
 
 The development environment application uses the following minimum set of developer tools:
 
