@@ -8,11 +8,13 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
+    "rootDir": "./dist",
     "outDir": "./dist"
   },
   "exclude": [
+    "dist/node_modules",
     "node_modules",
     "typings",
-    "dist"
+    "src"
   ]
 }
