@@ -7,5 +7,12 @@ body {
 
 a {
     color: #a6e1ec;
+}
 
+.danger {
+    color: #b92c28;
+}
+
+.selected {
+    font-size: large;
 }
