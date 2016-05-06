@@ -8,11 +8,12 @@
   "scripts": {
     "postinstall": "typings install && npm run build",
     "clean": "rm -rf ./dist",
-    "build": "concurrently \"npm run tsc\" \"npm run cpx\"",
-    "dev-server": "tsc && concurrently \"npm run tsc:w\" \"npm run cpx:w\" \"npm run lite\"",
+    "build": "concurrently \"npm run tsc\" \"npm run cpx-node\" \"npm run cpx\"",
+    "dev-server": "tsc &&  concurrently \"npm run tsc:w\" \"npm run cpx:w\" \"npm run lite\"",
     "lite": "lite-server -c lite-server.json",
     "cpx": "./node_modules/.bin/cpx \"src/**/*.{html,png,jpg,css}\" dist",
     "cpx:w": "./node_modules/.bin/cpx \"src/**/*.{html,png,jpg,css}\" dist --verbose --watch",
+    "cpx-node": "./node_modules/.bin/cpx \"node_modules/**/*.*\" dist/node_modules",
     "tsc": "./node_modules/.bin/tsc",
     "tsc:w": "./node_modules/.bin/tsc -w",
     "typings": "./node_modules/.bin/typings"
