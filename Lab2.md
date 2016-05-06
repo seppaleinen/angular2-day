@@ -4,10 +4,10 @@ Lab2, en- och två-vägsdatabindning
 OK, nu har vi fått igång Angular 2 och vi kan utveckla och lägga till
 ändringar och allt uppdateras automagiskt.
 
-Dags att börja borra lite djupare i Angular 2 och vi börjar då med 
+Dags att börja borra lite djupare i Angular 2 och vi börjar då med
 det grundläggande: databindning. D.v.s magin som får data att flöda
-mellan våran HTML (eller snarare dess motsvarighet i det körande 
-systemet, DOM:en) och våra komponenter skrivna i Typescript (eller 
+mellan våran HTML (eller snarare dess motsvarighet i det körande
+systemet, DOM:en) och våra komponenter skrivna i Typescript (eller
 Javascript).
 
 Vi börjar med att dra igång våran applikation med `npm run dev-server`
@@ -45,13 +45,13 @@ export class AppComponent {
 }
 ```
 
-Observera att HTML-mallen ändrades så att den kunde spänna över flera rader 
+Observera att HTML-mallen ändrades så att den kunde spänna över flera rader
 genom att använda _backtick_ ( ` ) istället för _single quote_ ( ' ).
 
 Sådär, då ska vi ha en rad
 
     _Sekunder sedan start: nnn s_
-    
+
 i vyn.
 
 Gamla hederliga {{}}-interpolering funkar som vanligt!
@@ -92,7 +92,7 @@ Karaktär: <input type="text" [(ngModel)]="description">
 })
 export class AppComponent {
   seconds: number = -1;
-  
+
   beer: string;
   description: string;
 
@@ -106,11 +106,11 @@ export class AppComponent {
   }
 }
 ```
-    
+
 OK, vad var det där med \[\(ngModel\)\]="beer" nu då?
-  
-Det är den nya syntaxen för 2-vägsdatabindning. 
- 
+
+Det är den nya syntaxen för 2-vägsdatabindning.
+
 Dax för lite teori
 ------------------
 
@@ -125,8 +125,8 @@ Rent allmänt kommer det finnas följande sätt att binda data
 Hmm, men vad är det här med _properties_ och _events_?
 
 ### Properties
-När vi talar om _properties_ menar vi _properties_ på DOM-element, d.v.s 
-(den dynamiska) representationen av våran HTML i webbläsarens minne. Det är 
+När vi talar om _properties_ menar vi _properties_ på DOM-element, d.v.s
+(den dynamiska) representationen av våran HTML i webbläsarens minne. Det är
 DOM:en som manipuleras av Angular genom att bl.a element, events och properties
 läggs till, tas bort och ändras under tiden applikationen exekverar.
 
@@ -137,14 +137,14 @@ property, men sedan ändrar vi i körtid property-värdet, inte attributet.
 Angular utnyttjar även DOM-properties för att skapa "kanaler" mellan komponenter
 (mer om det längre fram), därigenom utökar vi property-konceptet att även innefatta
 komponent-properties och direktiv-properties.
-  
+
 ### Events
 När vi talar om _events_ är det i grunden DOM-events vi pratar om, t.ex onclick,  
 men även här utökar Angular modellen att även innefatta komponent- och direktiv-
 events.
 
 
-Med detta under bältet, låt oss labba vidare, men vi backar tillbaka lite och 
+Med detta under bältet, låt oss labba vidare, men vi backar tillbaka lite och
 tar det steg för steg.
 
 Event-bindning
@@ -170,9 +170,9 @@ Samt en metod i våran komponent-klass
   }
   :
 ```
-   
+
 Här har vi bundit event-typen _click_ till våran metod _AppComponent.clear()_.
-  
+
 Property-bindning
 -----------------
 Vi vill inaktivera knappen om inget data är inmatat.
@@ -203,6 +203,7 @@ Vad har vi lärt oss?
 --------------------
 
 __Sammanfatta!!!__
+
 
 Cool, vi börjar få lite kläm på hur data flyter fram och tillbaka mellan våran
 komponentklass och vyn.
