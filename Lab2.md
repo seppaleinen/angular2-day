@@ -48,13 +48,9 @@ export class AppComponent {
 Observera att HTML-mallen ändrades så att den kunde spänna över flera rader
 genom att använda _backtick_ ( ` ) istället för _single quote_ ( ' ).
 
-Sådär, då ska vi ha en rad
+Sådär, då ska vi ha en rad `Sekunder sedan start: nnn s` i vyn.
 
-    _Sekunder sedan start: nnn s_
-
-i vyn.
-
-Gamla hederliga {{}}-interpolering funkar som vanligt!
+Gamla hederliga \{\{\}\}-interpoleringen funkar som vanligt!
 
 Hur är det då med input?
 
@@ -142,6 +138,8 @@ komponent-properties och direktiv-properties.
 När vi talar om _events_ är det i grunden DOM-events vi pratar om, t.ex onclick,  
 men även här utökar Angular modellen att även innefatta komponent- och direktiv-
 events.
+
+Mer finns att läsa här: [Beskrivning av bindnings-syntax](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax)
 
 
 Med detta under bältet, låt oss labba vidare, men vi backar tillbaka lite och
