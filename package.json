@@ -13,7 +13,7 @@
     "lite": "lite-server -c lite-server.json",
     "cpx": "./node_modules/.bin/cpx \"src/**/*.{js,ts,html,png,jpg,css}\" dist --verbose",
     "cpx:w": "./node_modules/.bin/cpx \"src/**/*.{js,ts,html,png,jpg,css}\" dist --verbose --watch",
-    "cpx-node": "./node_modules/.bin/cpx \"node_modules/**/*.*\" dist/node_modules",
+    "cpx-node": "./node_modules/.bin/cpx \"node_modules/**/*.*\" dist/node_modules --verbose",
     "tsc": "./node_modules/.bin/tsc",
     "tsc:w": "./node_modules/.bin/tsc -w",
     "typings": "./node_modules/.bin/typings"
