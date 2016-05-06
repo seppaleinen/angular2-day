@@ -43,10 +43,6 @@ a {
 .danger {
     color: #b92c28;
 }
-
-.selected {
-  font
-}
 :
 ```
 
@@ -225,6 +221,17 @@ export class AppComponent {
 
 Och så fixar vi styling så att vald ölsort markeras i listan med 
 property-bindning för _class_.
+Först lite CSS:
+Vi lägger till lite mer css i _./src/styles.css_
+```css
+:
+.selected {
+  font
+}
+:
+```
+
+Sen uppdaterar vi _AppComponent_:
 ```typescript
 :
   <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)">
