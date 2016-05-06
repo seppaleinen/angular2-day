@@ -65,13 +65,15 @@ Skapa en Angular-komponent
 Vi börjar med att lägga till filen _app.component.ts_ i _./src_ med
 följande innehåll:
 
-	import { Component } from '@angular/core';
+```typescript
+import { Component } from '@angular/core';
 
-	@Component({
-	    selector: 'my-app',
-	    template: '<h1>Min Angular2-komponent</h1>'
-	})
-	export class AppComponent { }
+@Component({
+    selector: 'my-app',
+    template: '<h1>Min Angular2-komponent</h1>'
+})
+export class AppComponent { }
+```
 	
 OK, vad ser vi här? 
 
@@ -89,9 +91,11 @@ Komponenter är grundläggande i Angular 2 och vi indikerar att en klass
 I @Component anger vi _selector_, vilket är HTML-taggen med vilken man 
 kan använda komponenten, t.ex:
 
-	<body>
-		<my-app></my-app>
-	</body>
+```html
+<body>
+    <my-app></my-app>
+</body>
+```
 
 Vi anger även _template_. Detta är html-koden som utgör komponentens vy.
 Kan även vara en referens till en separat HTML-fil.
@@ -107,11 +111,13 @@ För att få igång Angular behövs en bootstrap som laddar rot-komponenten.
 
 Detta implementeras i form av _main.ts_:
 
-	import { bootstrap }    from '@angular/platform-browser-dynamic';
+```typescript
+import { bootstrap }    from '@angular/platform-browser-dynamic';
 
-	import { AppComponent } from './app.component';
+import { AppComponent } from './app.component';
 
-	bootstrap(AppComponent);
+bootstrap(AppComponent);
+```
 	
 Här är det rakt på.
 
@@ -129,52 +135,55 @@ Vi behöver en huvudsida, _index.html_. Skapa _./src/index.html.
 
 Se kommentarer i HTML-koden.
 
-	<html lang="sv">
-      <head>
-        <title>Angular 2 Labb 1</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
-    
-        <!-- 1. Ladda basbibliotek -->
-        <!-- Importera Polyfill(s) för gamla webbläsare -->
-        <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    
-        <!-- Importera Polyfill(s) för Angular2 -->
-        <script src="node_modules/zone.js/dist/zone.js"></script>
-        <script src="node_modules/reflect-metadata/Reflect.js"></script>
+```html
+<html lang="sv">
+  <head>
+    <title>Angular 2 Labb 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 
-        <!-- Importera SystemJS -->
-        <script src="node_modules/systemjs/dist/system.src.js"></script>
-    
-        <!-- 2. Konfigurera SystemJS med våran konfiguration -->
-        <script src="systemjs.config.js"></script>
-    
-        <!-- 3. Importera våran applikation, dvs SystemJS läser in allt 
-                under ./ ('app' är mappat mot './') 
-        -->
-        <script>
-          System.import('app').catch(function(err){ console.error(err);  });
-        </script>
-      </head>
-    
-      <!-- 4. Visa applikationen genom att inkludera våran HTML-tagg -->
-      <body>
-        <my-app>Laddar...</my-app>
-      </body>
-    </html>
+    <!-- 1. Ladda basbibliotek -->
+    <!-- Importera Polyfill(s) för gamla webbläsare -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+
+    <!-- Importera Polyfill(s) för Angular2 -->
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+
+    <!-- Importera SystemJS -->
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- 2. Konfigurera SystemJS med våran konfiguration -->
+    <script src="systemjs.config.js"></script>
+
+    <!-- 3. Importera våran applikation, dvs SystemJS läser in allt 
+            under ./ ('app' är mappat mot './') 
+    -->
+    <script>
+      System.import('app').catch(function(err){ console.error(err);  });
+    </script>
+  </head>
+
+  <!-- 4. Visa applikationen genom att inkludera våran HTML-tagg -->
+  <body>
+    <my-app>Laddar...</my-app>
+  </body>
+</html>
+```
 
 Lite styling på det
 -------------------
 Till sist slänger vi in lite styling i _./src/styles.css:
 
-    body {
-        margin: 2em;
-        color: #c7d1cb;
-        background-color: #3c3c3c;
-        font-family: Arial, Helvetica, sans-serif;
-    }
- 
+```css
+body {
+    margin: 2em;
+    color: #c7d1cb;
+    background-color: #3c3c3c;
+    font-family: Arial, Helvetica, sans-serif;
+}
+```
 
 Kör applikationen
 -----------------
