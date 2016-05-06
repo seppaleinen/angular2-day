@@ -50,7 +50,7 @@ genom att använda _backtick_ ( ` ) istället för _single quote_ ( ' ).
 
 Sådär, då ska vi ha en rad `Sekunder sedan start: nnn s` i vyn.
 
-Gamla hederliga \{\{\}\}-interpoleringen funkar som vanligt!
+Gamla hederliga `{{}}-interpoleringen funkar som vanligt!
 
 Hur är det då med input?
 
@@ -103,7 +103,7 @@ export class AppComponent {
 }
 ```
 
-OK, vad var det där med \[\(ngModel\)\]="beer" nu då?
+OK, vad var det där med `[(ngModel)]="beer" nu då?
 
 Det är den nya syntaxen för 2-vägsdatabindning.
 
@@ -114,9 +114,9 @@ OK, vi kanske gick lite fort fram. Låt oss ta ett steg tillbaka och kolla lite
 på vad Angular-gänget har hittat på egentligen.
 
 Rent allmänt kommer det finnas följande sätt att binda data
-- från datakälla till vy med \[<a property>\]; med det kan vi sätta properties
-- från vy till datakälla (events) med (<an event>); med det kan vi "fånga" events
-- 2-vägsdatabindning blir kombinationen av dessa, d.v.s \[\(\)\], logiskt eller hur?
+- från datakälla till vy med `[<a property>]`; med det kan vi sätta properties
+- från vy till datakälla (events) med `(<an event>)`; med det kan vi "fånga" events
+- 2-vägsdatabindning blir kombinationen av dessa, d.v.s `[()]`, logiskt eller hur?
 
 Hmm, men vad är det här med _properties_ och _events_?
 
@@ -203,11 +203,14 @@ Vad har vi lärt oss?
 Vi har nu gått igenom hur vi allmänt flyttar data mellan DOM och komponentklass.
 
 Det går att skicka data från komponentklass till DOM:en vidare
-- interpolering, {{}} och
-- property-bindnigar \[\]
+- interpolering, `{{}}` och
+- property-bindnigar `[]`
 
 Vi kan även skicka events från DOM till komponentklass vidare
-- event-bindningar, \(\)
+- event-bindningar, `()`
+
+Och vi kan kombinera dessa 
+- 2-vägsbindning, `[()]`
 
 
 Cool, vi börjar få lite kläm på hur data flyter fram och tillbaka mellan våran
