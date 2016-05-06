@@ -122,7 +122,7 @@ Vilket i sin tur kan expanderas till property-bindningsform
 </template>
 ```
 
-Mer info finns på [Beskrivning av * och <template>](https://angular.io/docs/ts/latest/guide/template-syntax.html\#!\#star-template)
+Mer info finns på [Beskrivning av \* och \<template\>](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#star-template)
 
 OK, vi kör vidare och skapar en komponent för öldetaljer.
 
