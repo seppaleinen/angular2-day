@@ -224,12 +224,11 @@ property-bindning för _class_.
 Först lite CSS:
 Vi lägger till lite mer css i _./src/styles.css_
 ```css
-:
+::
 .selected {
   font
-}
-:
-```
+}:
+:```
 
 Sen uppdaterar vi _AppComponent_:
 ```typescript
