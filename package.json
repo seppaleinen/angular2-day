@@ -4,7 +4,7 @@
   "description": "CAG Angular 2 lab day",
   "license": "UNLICENSED",
   "author": "Joel Binnquist",
-  "repository":"TBD",
+  "repository": "https://github.com/CAG-Contactor/angular2-day",
   "scripts": {
     "postinstall": "typings install && npm run build",
     "clean": "rm -rf ./dist",

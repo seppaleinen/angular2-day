@@ -3,10 +3,6 @@
 *.ipr
 /.idea
 
-# Ignore artifacts from TS compilation
-*.js
-*.js.map
-
 # Logs
 logs
 *.log
