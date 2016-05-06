@@ -119,7 +119,7 @@ Vilket i sin tur kan expanderas till property-bindningsform
 ```html
 <template [ngIf]="true">
   <p>Banan</p>
-/template>
+</template>
 ```
 
 Mer info finns på [Beskrivning av * och <template>](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#star-template)
