@@ -202,8 +202,18 @@ _AppComponent.isEmpty()_
 Vad har vi lärt oss?
 --------------------
 
-__Sammanfatta!!!__
+Vi har nu gått igenom hur vi allmänt flyttar data mellan DOM och komponentklass.
+
+Det går att skicka data från komponentklass till DOM:en vidare
+- interpolering, {{}} och
+- property-bindnigar \[\]
+
+Vi kan även skicka events från DOM till komponentklass vidare
+- event-bindningar, \(\)
 
 
 Cool, vi börjar få lite kläm på hur data flyter fram och tillbaka mellan våran
 komponentklass och vyn.
+
+I nästa labb tar vi en titt på hur vi kan bygga komponenthierarkier och låta
+data och events flyta mellan komponenter.
