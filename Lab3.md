@@ -231,14 +231,14 @@ Vi lägger till lite mer css i _./src/styles.css_
 :```
 
 Sen uppdaterar vi _AppComponent_:
-```typescript
+````typescript
 :
   <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)">
 :
   isSelected(beer) {
     return beer === this.selectedBeer;
   }
-```
+````
 
 
 Vad har vi lärt oss?
