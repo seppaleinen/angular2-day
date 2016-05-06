@@ -187,7 +187,7 @@ body {
 
 Kör applikationen
 -----------------
-Kör ´npm run dev-server´ och surfa in på http://localhost:12380/
+Kör npm run `dev-server` och surfa in på http://localhost:12380/
 
 Nu bör det dyka upp en sida med texten: 
       
