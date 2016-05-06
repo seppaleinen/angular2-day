@@ -143,6 +143,8 @@ När vi talar om _events_ är det i grunden DOM-events vi pratar om, t.ex onclic
 men även här utökar Angular modellen att även innefatta komponent- och direktiv-
 events.
 
+Mer finns att läsa här: [Beskrivning av bindnings-syntax](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax)
+
 
 Med detta under bältet, låt oss labba vidare, men vi backar tillbaka lite och 
 tar det steg för steg.
