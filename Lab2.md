@@ -22,27 +22,28 @@ dynamiskt uppdatera sin tillhörande vy.
 
 Vi gör det genom att lägga till en räknare i våran _AppComponent_:
 
+```typescript
+@Component({
+  selector: 'my-app',
+  template:
+`
+<h1>Min Angular2-komponent</h1>
+<p>Sekunder sedan sidan laddades: {{seconds}} s</p>
+`
+})
+export class AppComponent {
+  seconds: number = -1;
 
-    @Component({
-      selector: 'my-app',
-      template:
-    `
-    <h1>Min Angular2-komponent</h1>
-    <p>Sekunder sedan sidan laddades: {{seconds}} s</p>
-    `
-    })
-    export class AppComponent {
-      seconds: number = -1;
-    
-      constructor() {
-        this.nextTimeout();
-      }
-    
-      nextTimeout() {
-        this.seconds++;
-        setTimeout(() => this.nextTimeout(), 1000);
-      }
-    }
+  constructor() {
+    this.nextTimeout();
+  }
+
+  nextTimeout() {
+    this.seconds++;
+    setTimeout(() => this.nextTimeout(), 1000);
+  }
+}
+```
 
 Observera att HTML-mallen ändrades så att den kunde spänna över flera rader 
 genom att använda backticks ( ` ).
