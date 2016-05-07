@@ -53,7 +53,32 @@ liggande i komponenterna, så vi definierar en egen tjänst.
 ### BeerService
 Vi bryter ut en egen tjänst som håller våra ölsorter, _./src/beer/beer.service.ts_
 ```typescript
+import { Injectable } from '@angular/core';
+import {Beer} from "./beer";
 
+@Injectable()
+export class BeerService {
+  private beers: Beer[] = [
+    new Beer('Duvel','Ljus belgare som passar bra en varm sommardag.'),
+    new Beer('Pripps Blå','Eh?')
+  ];
+
+  getBeers() {
+    return this.beers;
+  }
+
+  addBeer(newBeer:Beer) {
+    this.beers.push(newBeer);
+  }
+
+  removeBeer(beerToRemove:Beer) {
+    this.beers = this.beers.filter(b=>!(b === beerToRemove));
+  }
+
+  getBeerById(id:number): Beer {
+    return this.beers.find(b => b.id === id);
+  }
+}
 ```
 
 Och flyttar in våran _./src/beerdetails/beer.ts_-klass till _./src/beer/_ 
@@ -217,7 +242,8 @@ Vi deklararer provider för `BeerService`, vilken ärvs av alla barnkomponenter.
 Vi tar bort
 ```html
 <hr>
-<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (updated)="beerUpdated($event)"></my-beer-details>
+<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (updated)="beerUpdated($event)">
+</my-beer-details>
 ```
 från mallen.
 Vi tar bort våran `selectedBeer`.
@@ -240,9 +266,7 @@ li:hover {
 
 Vad har vi lärt oss?
 --------------------
-```typescript
 
-```
 
 
 I
