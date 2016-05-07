@@ -147,6 +147,8 @@ export class BeerDetailsComponent implements OnActivate {
 }
 ```
 
+Kommentera...
+
 ### BeerListComponent
 Vi bryter ut listan till en egen komponent, _./src/beerlist/beerlist.component.ts
 ```typescript
@@ -162,7 +164,7 @@ import {BeerService} from "../beer/beer.service";
   template: `
 <h2>Öllistan</h2>
 <ol>
-  <li *ngFor="let beer of beers"><span class="badge">{{beer.points}}</span>
+  <li *ngFor="let beer of getBeers()"><span class="badge">{{beer.points}}</span>
     <a (click)="select(beer)">{{beer.name}}</a> <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
   </li>
 </ol>
@@ -172,12 +174,10 @@ import {BeerService} from "../beer/beer.service";
 export class BeerListComponent {
   private router: Router;
   private beerService: BeerService;
-  private beers: Beer[];
 
   constructor(router: Router, beerService: BeerService) {
     this.router = router;
     this.beerService = beerService;
-    this.setBeers(beerService.getBeers());
   }
 
   addBeer() {
@@ -194,11 +194,13 @@ export class BeerListComponent {
     this.router.navigate(['/beer-details', beerToSelect.id]);
   }
 
-  private setBeers(beers:Beer[]) {
-    this.beers = beers.sort((b1, b2) => b2.points - b1.points);
+  getBeers() {
+    return this.beerService.getBeers().sort((b1, b2) => b2.points - b1.points);
   }
 }
 ```
+
+Kommentera...
 
 ### AppComponent
 Sen gör vi en total makeover på _AppComponent_
