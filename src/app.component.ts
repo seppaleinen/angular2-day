@@ -8,7 +8,7 @@ import {BeerDetailsComponent} from "./beerdetails/beerdetails.component"
   template: `
 <h2>Öllistan</h2>
 <ol>
-  <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)">
+  <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)"><span class="badge">{{beer.points}}</span>
     <a href="#" (click)="select(beer)">{{beer.name}}</a> <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
   </li>
 </ol>
@@ -16,7 +16,7 @@ import {BeerDetailsComponent} from "./beerdetails/beerdetails.component"
 
 <hr>
 
-<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer"></my-beer-details>
+<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (updated)="beerUpdated($event)"></my-beer-details>
 `
 })
 export class AppComponent {
@@ -46,5 +46,9 @@ export class AppComponent {
 
   isSelected(beer) {
     return beer === this.selectedBeer;
+  }
+
+  beerUpdated(event) {
+    this.beers = this.beers.sort((b1, b2) => b2.points - b1.points);
   }
 }

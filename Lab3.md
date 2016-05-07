@@ -168,6 +168,9 @@ Vi använder direktivet _ngIf_ för att styra om detaljerna skall visas.
 
 OK, det funkar, men nu ska vi ta bort de hårdkodade värdena.
 
+Parametrisera komponent med @Input och property-bindning
+--------------------------------------------------------
+
 Först ser vi till att man kan välja vad som skall visas i _AppComponent_:
 ```typescript
 :
@@ -204,6 +207,78 @@ _AppComponent.selectedBeer_ med _BeerDetailsComponent.beer_:
 ```
 
 Och _BAM!_ nu öppnas detaljvyn när man klickar på en ölsort i listan.
+
+Nu, ska vi få komponenten att ge ifrån sig lite events oxå.
+
+Komponentspecifika events
+-------------------------
+Nu ska lägga till en gilla-knapp i _BeerDetailsComponent_. När man gillar en ölsort så 
+inkrementeras en poängräknare och dessutom skickas ett event till eventuella lyssnare.
+
+Vi sätter upp _AppComponent_ att lyssna på dessa events och sortera om öllistan när 
+de kommer.
+
+Vi börjar med att lägga till poäng i _./src/beerdetails/beer.ts_:
+```typescript
+:
+points:number
+:
+```
+
+Sedan lägger vi till gilla-knapp och event-emitter i _./src/beerdetails/beerdetails.component.ts_:
+```typescript
+import {Component, Input, EventEmitter} from "@angular/core";
+:
+<button type="button" (click)="like()">Yep, den är smarrig!</button>
+:
+  @Output()
+  updated: EventEmitter<Beer> = new EventEmitter();
+  
+  like() {
+    this.beer.points++;
+    this.updated.emit(beer);
+  }
+:
+```
+
+Här används dekoratorn `@Output` för att markera att ett fält är en output-property man
+kan binda emot. Denna är implementerad med `ÈventEmitter` vilken används för att skicka
+events. Fältnamnet blir det event man kan binda emot.
+
+I våran `like()`-metod anropar vi `EventEmitter.emit()`för att skicka eventet.
+
+Till sist sätter vi upp en event-bindning i _AppComponent_ så att vi kan lyssna på
+_update_-events.
+```typescript
+:
+<li *ngFor="let beer of beers" [class.selected]="isSelected(beer)"><span class="badge">{{beer.points}}</span>
+:
+<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (update)="beerUpdated($event)"></my-beer-details>
+:
+beerUpdated(event) {
+  this.beers = this.beers.sort((b1, b2) => b2.points - b1.points);
+}
+:
+```
+
+Osså lite styling på det i _./src/styles.css_:
+```css
+:
+.badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    background-color: #ed6a13;
+    padding: 0.2em 0.3em 0.2em 0.3em;
+    margin: 0.8em 0 0.8em 0;
+    border-radius: 4px 4px 4px 4px;
+}
+:
+``
+
+
+Slutlig finputs
+---------------
 
 Till sist putsar vi till applikationen och fixar så att detaljvyn öppnas 
 automatiskt när vi lägger till en ny ölsort:
@@ -252,5 +327,5 @@ I den här labben lärde vi oss två gamla kända direktiv i ny form
 
 Vi refaktorerade applikationen och skapade en separat komponent
 för öldetaljer, vilken tar emot inparametrar via property-binding
-och @Input.
+och `@Input` samt ger ifrån sig events med `@Output` och `EventEmitter`.
 

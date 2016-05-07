@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Beer} from "./beer";
 
 @Component({
@@ -13,10 +13,18 @@ import {Beer} from "./beer";
 <hr>
 Ange ölsort: <input type="text" [(ngModel)]="beer.name"><br><br>
 Karaktär: <input type="text" [(ngModel)]="beer.description"><br><br>
+<button type="button" (click)="like()">Yep, den är smarrig!</button>
 `
 })
 export class BeerDetailsComponent {
   @Input()
   beer: Beer;
+  @Output()
+  updated: EventEmitter<Beer> = new EventEmitter();
+  
+  like() {
+    this.beer.points++;
+    this.updated.emit(this.beer);
+  }
 }
 
