@@ -28,6 +28,12 @@ li:hover {
     cursor: hand;
 }
 
+a.remove:hover {
+    background-color: red;
+    color: white;
+    cursor: hand;
+}
+
 a.badge:hover {
     cursor: hand;
 }

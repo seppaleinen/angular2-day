@@ -17,6 +17,8 @@ AppComponent
 Vi stuvar om i _AppComponent_ igen:
 ```typescript
 :
+import {Location} from '@angular/common';
+:
   template:
 `
 <nav>
@@ -31,7 +33,15 @@ Vi stuvar om i _AppComponent_ igen:
   {path: '/top-list', component: TopListComponent},
   {path: '/beer-admin', component: BeerAdminComponent},
 ])
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private location: Location, private router: Router){}
+
+  ngOnInit() {
+    // Fudge för att hantera att router-default ej stöds än
+    if (this.location.path() === '') {
+      this.router.navigate(['/top-list'])
+    }
+  }
 }
 :
 ```
@@ -103,6 +113,8 @@ ligger under en annan router.
 _BeerListComponent_
 ```typescript
 :
+    <a (click)="select(beer)">{{beer.name}}</a> <a class="danger remove" (click)="remove(beer)">[ta bort]</a>
+:
   select(beerToSelect) {
     this.router.navigate(['/beer-admin/beer-details', beerToSelect.id]);
   }
@@ -121,6 +133,12 @@ _BeerDetailsComponent_
 Sen lite styling på det:
 ```css
 :
+a.remove:hover {
+    background-color: red;
+    color: white;
+    cursor: hand;
+}
+
 a.badge:hover {
     cursor: hand;
 }

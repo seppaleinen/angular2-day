@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
-import {Routes, ROUTER_DIRECTIVES} from "@angular/router";
+import {Component, OnInit} from "@angular/core";
+import {Location} from '@angular/common';
+import {Routes, Router, ROUTER_DIRECTIVES} from "@angular/router";
 import {BeerService} from "./beer/beer.service";
 import {BeerAdminComponent} from "./beeradmin/beeradmin.component";
 import {TopListComponent} from "./toplist/toplist.component";
@@ -22,5 +23,13 @@ import {TopListComponent} from "./toplist/toplist.component";
   {path: '/top-list', component: TopListComponent},
   {path: '/beer-admin', component: BeerAdminComponent},
 ])
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private location: Location, private router: Router){}
+
+  ngOnInit() {
+    // Fudge för att hantera att router-default ej stöds än
+    if (this.location.path() === '') {
+      this.router.navigate(['/top-list'])
+    }
+  }
 }
