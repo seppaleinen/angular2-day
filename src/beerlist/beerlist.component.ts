@@ -39,7 +39,7 @@ export class BeerListComponent {
   }
 
   select(beerToSelect) {
-    this.router.navigate(['/beer-details', beerToSelect.id]);
+    this.router.navigate(['/beer-admin/beer-details', beerToSelect.id]);
   }
 
   private setBeers(beers:Beer[]) {
