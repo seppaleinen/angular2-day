@@ -156,6 +156,10 @@ export class BeerDetailsComponent {
 Samt ändra _AppComponent_:
 ```typescript
 :
+import {BeerDetailsComponent} from "./beerdetails/beerdetails.component"
+:
+  directives: [BeerDetailsComponent],
+:
 <button type="button" (click)="addBeer()">Lägg till ölsort</button>
 
 <hr>
@@ -164,6 +168,8 @@ Samt ändra _AppComponent_:
 :
 ```
 
+Vi måste deklarera att vi använder komponenten `my-beer-details` med 
+`directives: [BeerDetailsComponent]`
 Vi använder direktivet _ngIf_ för att styra om detaljerna skall visas.
 
 OK, det funkar, men nu ska vi ta bort de hårdkodade värdena.
