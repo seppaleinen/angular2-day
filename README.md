@@ -1,21 +1,18 @@
-CAG Angular 2 Lab Day
-=====================
-This application is intended to be used in the CAG Contactor Angular 2 lab day.
+CAG Angular 2 Kompetensutvecklingsdag
+=====================================
 
 Setup
 -----
-The development environment is based on NodeJS v6.0.0, so one must
-install NodeJS first and foremost.
+Utvecklingsmiljön är baserad på NodeJS v6.0.0 så man måste installera
+NodeJS först och främst.
 
-The development environment application uses the following minimum set
-of developer tools:
-
+Utvecklingsmiljön använder följande utvecklingsverktyg:
 - lite-server (https://github.com/johnpapa/lite-server)
 - typescript (https://github.com/Microsoft/TypeScript)
 - typings (https://github.com/typings/typings)
 - cpx (https://www.npmjs.com/package/cpx)
 
-### Directory structure
+### Katalogstruktur
 
     angular2-day
       |
@@ -25,65 +22,75 @@ of developer tools:
       |
       +- (node_modules)
 
-All source code (.html, .ts, .css) and resources (.png, .jpg) are
-located in _./src/_.
+All källkod (.html, .ts, .css) and resurser (.png, .jpg) ligger
+under `./src/`.
 
-When doing `npm install` _./node_modules/_ will be created, in which
-3pp dependencies are placed by NPM.
+När man kör `npm install` så skapas ./node_modules`-katalogen där
+alla 3PP-bibliotek läggs av NPM.
 
-When doing `npm run build` the following happens:
+När man kör `npm run build` händer följande:
 
-- _./node_modules_ is copied into _./dist_
-- _./src_ is copied into _./dist_
-- typescript compilation is performed on all .ts-files in _./dist_
-  placing the generated output (.js, .js.map) alongside the .ts-files
+- `./node_modules kopieras till `./dist`
+- alla filer i `./src` kopieras till `./dist`
+- Typescript-kompilering körs på alla `.ts`-filer i `./dist`
+  och resultat (`.js`- och `.js.map`-filer) läggs bredvid sina
+  `.ts`-filer
 
-When running the development server it uses _./dist/_ as the base to
-serve from.
+När man kör utvecklingsservern (lite-server) används `./dist`
+som bas-katalog.
 
-If one want to deploy the application into a server, just copy the
-_./dist_ directory.
+### NPM-skript
+Följande script är definierade i `package.json` och kan
+köras med `npm run \<script-namn\>`:
 
-### NPM scripts
-In package.json the following scripts are defined:
+#### Huvudskript
 
-#### Main scripts
+- clean: tar bort `./dist`-katalogen
+- build: kopierar alla filer i `./src` `./node_modules` till
+  `./dist/` och kompilerar sedan alla typescript-filer under
+  `./dist`
+- dev-server: kopierar alla filer i `./src` till `./dist`,
+  kompilerar alla `.ts`-filer och startar sedan
+  utvecklingsservern (lite-server) och startar sedan parallellt
+  en bevakning av filförändringar (cpx) som kontinuerligt
+  kopierar alla filer som ändras i `./src` till `./dist/`, samt
+  en kontinuerlig kompilering av ändrade i `.ts`-filer i
+  `./dist`-katalogen.
 
-- clean: removes _./dist/_
-- build: copy files in _./src_ and _./node_modules_ to _./dist/_ and
-  then compile all .ts-files in _./dist_
-- dev-server: copy files in _./src_ to _./dist_, compiles all .ts-files
-  and then starts the development server (lite-server) and concurrently
-  watch for file changes in _./src_ and copy to _./dist/_, then
-  _./compile_ if necessary.
+#### Hjälpskript
 
-#### Auxilliary scripts
+- postinstall: vid slutet av körning av `npm install` körs
+  `typings` och `npm run build`
+- lite: starta lite-server
+- cpx: kopier applikationsfiler i `./src` (ts, html, css, png, jpg)
+  till `./dist/`
+- cpx:w: sammas som `cpx` men startar även kontinuerlig bevakning
+  som kopierar dessa filer vid förändringar
+- cpx-node: kopiera `./node_modules`-filer till `./dist/node_modules`
+- tsc: kör typescript-komplering
+- tsc:w: samma som `tsc` men startar även kontinuerlig bevakning
+  av `.ts`-filer och kompilerar vid förändring
+- typings: kör `typings`
 
-- postinstall: at npm install run typings and build
-- lite: start lite-server
-- cpx: copy application files (ts, html, css, png, jpg) to _./dist/_
-- cpx:w: same as _cpx_ but starts a watch and copies at file changes
-- cpx-node: copy _./node_modules_ files to _./dist/node_modules_
-- tsc: run typescript compiler
-- tsc:w: same as tsc but starts a watch and compiles at changes in
-  .ts files
-- typings: run typings
+### Rensa
+Rensa alla byggartefakter med
 
-### Build
-Build the application with
+    npm run clean
+
+### Bygga applikationen
+Bygg hela applikationen med
 
     npm run build
 
-When building and running all application files and _./node_modules_
-files are placed in _./dist/_.
 
-### Run
-Run the development server and watch for changes, continuously updating
-the browser with
+### Kör
+Kör applikationen i utvecklings-servern med bevakning alla ändringar
+och automatisk kopiering och omkompilering.
 
     npm run dev-server
 
-### Configuration
-Typescript compiler is configured in _tsconfig.js_
-Typings is configured in _typings.json_
-Lite-server is configured in _lite-server.json_
+### Konfiguration
+Typescript-kompilatorn är konfigurerad i `tsconfig.js`
+Typings är konfigurerad i `typings.json`
+Lite-server är konfigurerad i `lite-server.json`
+
