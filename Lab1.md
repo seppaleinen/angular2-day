@@ -172,19 +172,6 @@ Se kommentarer i HTML-koden.
 </html>
 ```
 
-Lite styling på det
--------------------
-Till sist slänger vi in lite styling i _./src/styles.css:
-
-```css
-body {
-    margin: 2em;
-    color: #c7d1cb;
-    background-color: #3c3c3c;
-    font-family: Arial, Helvetica, sans-serif;
-}
-```
-
 Kör applikationen
 -----------------
 Kör `npm run dev-server` och surfa in på http://localhost:12380/
