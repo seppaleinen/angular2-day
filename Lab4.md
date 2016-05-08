@@ -80,9 +80,20 @@ export class BeerService {
   }
 }
 ```
+När vi bygger tjänster så behöver vi inte göra något annat än 
+att annotera med `@Injectable()`så att metadata genereras
+för Angular.
 
-Och flyttar in våran _./src/beerdetails/beer.ts_-klass till _./src/beer/_ 
-(kom ihåg att fixa importer i beerdetails.component.ts och app.component.ts).
+Vi gör en fultjänst som inte på ett enkelt sätt kan 
+refaktoriseras till en riktig back-end-tjänst. För det
+skulle vi behöva promises och annat koncept med sparning
+när vi ändrar i ölsorterna. Men vi komplicerar inte 
+applikationen med de aspekterna i de här labbarna.
+
+### Beer
+Vi flyttar dessutom in våran _./src/beerdetails/beer.ts_-klass 
+till _./src/beer/_-katalogen (kom ihåg att fixa importer i 
+`beerdetails.component.ts` och `app.component.ts`).
  
 Dessutom lägger vi till ett `id`-fält på `Beer`-klassen
 ```typescript
@@ -95,59 +106,6 @@ Dessutom lägger vi till ett `id`-fält på `Beer`-klassen
   }
 :  
 ```
-
-### BeerDetailsComponent
-Istället för property-bindning tar vi istället in ID för vald ölsort 
-från routen och hämtar själva ölsorten från _BeerService_.
- 
-Vi modifierar _BeerDetailsComponent_
-```typescript
-import {Component} from "@angular/core";
-import { OnActivate, Router, RouteSegment, RouteTree} from '@angular/router';
-import {Beer} from "../beer/beer";
-import {BeerService} from "../beer/beer.service";
-
-@Component({
-  selector: 'my-beer-details',
-  template: `
-<h2>Ölsort: {{beer.name}}</h2>
-<p>ID: {{beer.id}}</p>
-<p>Poäng: <span class="badge">{{beer.points}}</span></p>
-<dl>
-  <dt>Beskrivning</dt>
-  <dd>{{beer.description}}</dd>
-</dl>
-
-<hr>
-Ange ölsort: <input type="text" [(ngModel)]="beer.name"><br><br>
-Karaktär: <input type="text" [(ngModel)]="beer.description"><br><br>
-<button type="button" (click)="like()">Yep, den är smarrig!</button>
-<hr>
-<button type="button" (click)="close()">Stäng</button>
-`
-})
-export class BeerDetailsComponent implements OnActivate {
-  beer: Beer;
-
-  constructor(private router: Router, private beerService:BeerService) {
-  }
-
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree) {
-    let id = +curr.getParam('id'); // Se till att det blir ett number
-    this.beer = this.beerService.getBeerById(id);
-  }
-
-  like() {
-    this.beer.points++;
-  }
-
-  close() {
-    this.router.navigate(['/']);
-  }
-}
-```
-
-Kommentera...
 
 ### BeerListComponent
 Vi bryter ut listan till en egen komponent, _./src/beerlist/beerlist.component.ts
@@ -200,10 +158,82 @@ export class BeerListComponent {
 }
 ```
 
-Kommentera...
+Öllistan ligger nu i en egen komponent och använder routern 
+för att öppna detaljvyn. 
+
+För att få tillgång till routern importerar vi den injicerar 
+vi den i konstruktorn.
+
+Vi injicerar även _BeerService_ i konstruktorn.
+
+Vi har ändrat på våran `select()`-metod, så att den nu
+använder routern för att navigera till detaljvyn.
+
+Övriga metoder använder _BeerService_ för att komma åt
+ölsorterna.
+
+### BeerDetailsComponent
+Vi refaktoriserar våran _BeerDetailsComponent_ och ersätter 
+property-bindning med att istället få _ID_ för vald ölsort 
+från routen och hämtar själva ölsorten från _BeerService_.
+ 
+Vi modifierar _BeerDetailsComponent_
+```typescript
+import {Component} from "@angular/core";
+import { OnActivate, Router, RouteSegment, RouteTree} from '@angular/router';
+import {Beer} from "../beer/beer";
+import {BeerService} from "../beer/beer.service";
+
+@Component({
+  selector: 'my-beer-details',
+  template: `
+<h2>Ölsort: {{beer.name}}</h2>
+<p>ID: {{beer.id}}</p>
+<p>Poäng: <span class="badge">{{beer.points}}</span></p>
+<dl>
+  <dt>Beskrivning</dt>
+  <dd>{{beer.description}}</dd>
+</dl>
+
+<hr>
+Ange ölsort: <input type="text" [(ngModel)]="beer.name"><br><br>
+Karaktär: <input type="text" [(ngModel)]="beer.description"><br><br>
+<button type="button" (click)="like()">Yep, den är smarrig!</button>
+<hr>
+<button type="button" (click)="close()">Stäng</button>
+`
+})
+export class BeerDetailsComponent implements OnActivate {
+  beer: Beer;
+
+  constructor(private router: Router, private beerService:BeerService) {
+  }
+
+  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree) {
+    let id = +curr.getParam('id'); // Se till att det blir ett number
+    this.beer = this.beerService.getBeerById(id);
+  }
+
+  like() {
+    this.beer.points++;
+  }
+
+  close() {
+    this.router.navigate(['/']);
+  }
+}
+```
+Återigen, vi injicerar _Router_ och _BeerService_.
+
+Dessutom implementerar vi gränssnittet _OnActivate_ 
+vilken definierar en metod, `routerOnActivate(...)`.
+Denna metod körs när våran komponent aktiveras som
+följd av att man navigerat till den. I den plockar
+vi ut _ID_ och hämtar specifik ölsort från
+_BeerService_.
 
 ### AppComponent
-Sen gör vi en total makeover på _AppComponent_
+Till siste gör vi en total makeover på _AppComponent_
 ```typescript
 import {Component} from "@angular/core";
 import {Routes, Router, ROUTER_DIRECTIVES} from "@angular/router";
@@ -240,7 +270,8 @@ Vi har lagt till ROUTER_DIRECTIVES
 Vi har lagt till `<router-outlet>`
 Vi har ändrat våran _anchor_.
 Vi har injicerat in `Router`-servicen i våran _AppComponent_.
-Vi deklararer provider för `BeerService`, vilken ärvs av alla barnkomponenter.
+Vi deklararer provider för `BeerService`, vilken ärvs av alla barnkomponenter. Notera att
+vi __INTE__ ska deklararera providers i barnkomponenter eftersom det medöfr att nya instanser skapas
 Vi tar bort
 ```html
 <hr>
