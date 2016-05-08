@@ -111,14 +111,14 @@ Dessutom lägger vi till ett `id`-fält på `Beer`-klassen
 Vi bryter ut listan till en egen komponent, _./src/beerlist/beerlist.component.ts
 ```typescript
 import {Component} from "@angular/core";
-import {Router, ROUTER_DIRECTIVES} from "@angular/router";
+import {Router} from "@angular/router";
 import {BeerDetailsComponent} from "../beerdetails/beerdetails.component";
 import {Beer} from "../beer/beer";
 import {BeerService} from "../beer/beer.service";
 
 @Component({
   selector: 'my-beer-list',
-  directives: [BeerDetailsComponent, ROUTER_DIRECTIVES],
+  directives: [BeerDetailsComponent],
   template: `
 <h2>Öllistan</h2>
 <ol>
