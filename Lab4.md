@@ -253,18 +253,6 @@ Vi ändrar våran `select(beer)`-metod att routa till detaljvyn (_BeerDetailsCom
 Vi tar bort `isSelected(beer)`-metoden.
 Vi implementerar `OnInit` och `ngOnInit()`
 
-###  Osså lite glasyr på kakan
-Lägg till i _./src/styles.css_
-```css
-:
-
-li:hover {
-    font-size: larger;
-    cursor: hand;
-}
-:
-```
-
 
 Vad har vi lärt oss?
 --------------------
