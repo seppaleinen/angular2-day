@@ -1,19 +1,19 @@
 import {Component} from "@angular/core";
-import {Router, ROUTER_DIRECTIVES} from "@angular/router";
+import {Router} from "@angular/router";
 import {BeerDetailsComponent} from "../beerdetails/beerdetails.component";
 import {Beer} from "../beer/beer";
 import {BeerService} from "../beer/beer.service";
 
 @Component({
   selector: 'my-beer-list',
-  directives: [BeerDetailsComponent, ROUTER_DIRECTIVES],
+  directives: [BeerDetailsComponent],
   template: `
 <h2>Öllistan</h2>
-<ol>
-  <li *ngFor="let beer of getBeers()"><span class="badge">{{beer.points}}</span>
-    <a (click)="select(beer)">{{beer.name}}</a> <a class="danger remove" (click)="remove(beer)">[ta bort]</a>
-  </li>
-</ol>
+<ul>
+  <div *ngFor="let beer of getBeers()"><span class="badge">{{beer.points}}</span>
+    <a (click)="select(beer)">{{beer.name}} ({{beer.id}})</a> <a class="danger remove" (click)="remove(beer)">[ta bort]</a>
+  </div>
+</ul>
 <button type="button" (click)="addBeer()">Lägg till ölsort</button>
 `
 })
