@@ -33,19 +33,6 @@ export class Beer {
 }
 ```
 
-Vi lägger till lite mer css i _./src/styles.css_
-```css
-:
-a {
-    color: #a6e1ec;
-}
-
-.danger {
-    color: #b92c28;
-}
-:
-```
-
 Rensa upp i _AppComponent_ och ta bort gamla ölburkar, men lägg till
 lite nytt...
 
@@ -267,22 +254,6 @@ beerUpdated(event) {
 :
 ```
 
-Osså lite styling på det i _./src/styles.css_:
-```css
-:
-.badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    background-color: #ed6a13;
-    padding: 0.2em 0.3em 0.2em 0.3em;
-    margin: 0.8em 0 0.8em 0;
-    border-radius: 4px 4px 4px 4px;
-}
-:
-``
-
-
 Slutlig finputs
 ---------------
 
@@ -302,15 +273,6 @@ export class AppComponent {
 
 Och så fixar vi styling så att vald ölsort markeras i listan med 
 property-bindning för _class_.
-Först lite CSS:
-Vi lägger till lite mer css i _./src/styles.css_
-```css
-:
-.selected {
-  font
-}
-:
-```
 
 Sen uppdaterar vi _AppComponent_:
 ```typescript
