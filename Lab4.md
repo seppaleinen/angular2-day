@@ -4,9 +4,11 @@ Nu har vi koll på hur vi kan bygga komponenter, samt sätta upp
 en hierarki av kommunicerande komponenter.
 
 I den här labben tittar vi på två saker
-- Hur vi kan bryta ut egna tjänster som kan injiceras in i komponenter
-- hur vi kan stödja routing mellan olika delar i applikationen med 
-  routern i Angular2.
+- Hur vi kan bryta ut egna tjänster som kan injiceras in i 
+  komponenter.
+- hur vi kan stödja routing mellan olika delar i applikationen 
+  med routern i Angular2, vilken stödjer navigering mellan 
+  olika vy-komponenter.
 
 Vi bryter upp våran applikation i två vyer
 - öllista; här visas öllistan och man kan lägga till och ta bort 
@@ -108,7 +110,7 @@ Dessutom lägger vi till ett `id`-fält på `Beer`-klassen
 ```
 
 ### BeerListComponent
-Vi bryter ut listan till en egen komponent, _./src/beerlist/beerlist.component.ts
+Vi bryter ut listan till en egen komponent, _./src/beerlist/beerlist.component.ts_
 ```typescript
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
@@ -233,7 +235,8 @@ vi ut _ID_ och hämtar specifik ölsort från
 _BeerService_.
 
 ### AppComponent
-Till siste gör vi en total makeover på _AppComponent_
+Till sist gör vi en total makeover på _AppComponent_.
+
 ```typescript
 import {Component} from "@angular/core";
 import {Routes, Router, ROUTER_DIRECTIVES} from "@angular/router";
@@ -249,47 +252,61 @@ import {BeerService} from "./beer/beer.service";
 })
 @Routes([
   {path: '/', component: BeerListComponent},
-  {path: 'beer-details/:id', component: BeerDetailsComponent},
+  {path: '/beer-details/:id', component: BeerDetailsComponent},
 ])
 export class AppComponent {
-
-  private router: Router;
-
-  constructor(router: Router) {
-    this.router = router;
+  constructor(private router: Router) {
   }
-
 }
 ```
 
 Här har det hänt grejer... 
 
-Vi har importerat `Routes` och `Router` ...
-Vi har konfigurerat en route för komponenten med `@Routes`-dekoratorn
-Vi har lagt till ROUTER_DIRECTIVES
-Vi har lagt till `<router-outlet>`
-Vi har ändrat våran _anchor_.
-Vi har injicerat in `Router`-servicen i våran _AppComponent_.
-Vi deklararer provider för `BeerService`, vilken ärvs av alla barnkomponenter. Notera att
-vi __INTE__ ska deklararera providers i barnkomponenter eftersom det medöfr att nya instanser skapas
-Vi tar bort
+All ölliste-hantering har försvunnit.
+Istället har vi en mager HTML-mall, som bara innehåller:
 ```html
-<hr>
-<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (updated)="beerUpdated($event)">
-</my-beer-details>
+<router-outlet></router-outlet>
 ```
-från mallen.
-Vi tar bort våran `selectedBeer`.
-Vi ändrar våran `select(beer)`-metod att routa till detaljvyn (_BeerDetailsComponent_).
-Vi tar bort `isSelected(beer)`-metoden.
-Vi implementerar `OnInit` och `ngOnInit()`
+Det är här routern kommer att lägga in den komponent 
+men navigerar till. För att det skall fungera
+måste vi lägga till `directives: [ROUTER_DIRECTIVES]`.
+
+Vi deklararer `provider` för _BeerService_, vilket gör 
+att Angular förstår hur _BeerService_ skapas vid 
+injicering i konstruktorer. 
+En mycket viktig detalj är att vi endast deklarerar den
+på toppkomponenten. Samma tjänsteinstans ärvs sedan ner
+till alla barnkomponenter. 
+Notera att vi __INTE__ ska deklararera `providers` i 
+barnkomponenter eftersom det skulle medför att nya 
+tjänsteinstanser skulle skapas för dem.
+
+Vi har konfigurerat routes med `@Routes`-dekoratorn:
+- när man navigerar till `http://localhost:12380/`kommer 
+  man till öllistan
+- när man navigerar till `http://localhost:12380/beer-details/3`
+  kommer man till detaljvyn för ölsorten med ID=3
+
+Vi har injicerat in `Router`-servicen i våran _AppComponent_, 
+men med lite alternativ syntax, fältet router skapas 
+automatiskt i och med att det är ett konstruktor-argument.
 
 
 Vad har vi lärt oss?
 --------------------
+Vi refaktoriserade hela applikationen och bröt ut en 
+datalagret till en egen tjänst. För det använde vi
+- `@Inject()`
+- `providers`, men bara på topp-komponenten
 
+Vi använde routern i Angular 2. För det behövdes
+- `<router-outlet></router-outlet>` på det ställe där
+  man vill att routern skall lägga in den komponent man
+  routar till.
+- Vi använde _Router_-tjänsten för att navigera.
 
-
-I
+Mer finns att läsa i 
+- [Routing](https://angular.io/docs/ts/latest/guide/router.html)
+- [Beroendeinjicering](https://angular.io/docs/ts/latest/guide/dependency-injection.html)
 
 
