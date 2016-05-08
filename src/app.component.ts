@@ -12,14 +12,9 @@ import {BeerService} from "./beer/beer.service";
 })
 @Routes([
   {path: '/', component: BeerListComponent},
-  {path: 'beer-details/:id', component: BeerDetailsComponent},
+  {path: '/beer-details/:id', component: BeerDetailsComponent},
 ])
 export class AppComponent {
-
-  private router: Router;
-
-  constructor(router: Router) {
-    this.router = router;
+  constructor(private router: Router) {
   }
-
 }
