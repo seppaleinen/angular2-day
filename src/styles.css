@@ -9,6 +9,22 @@ a {
     color: #a6e1ec;
 }
 
+button {
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 2px;
+    margin:0;
+    padding: 10px 24px;
+    cursor: pointer;
+    background-color: #1b6d85;
+    font-size: medium;
+    color: white;
+}
+
+button:hover {
+    font-size: large;
+}
+
 .danger {
     color: #b92c28;
 }
