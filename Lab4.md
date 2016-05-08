@@ -125,7 +125,8 @@ import {BeerService} from "../beer/beer.service";
 <h2>Öllistan</h2>
 <ul>
   <div *ngFor="let beer of getBeers()"><span class="badge">{{beer.points}}</span>
-    <a (click)="select(beer)">{{beer.name}} ({{beer.id}})</a> <a class="danger remove" href="#" (click)="remove(beer)">[ta bort]</a>
+    <a (click)="select(beer)">{{beer.name}} ({{beer.id}})</a> 
+    <a class="danger remove" href="#" (click)="remove(beer)">[ta bort]</a>
   </div>
 </ul>
 <button type="button" (click)="addBeer()">Lägg till ölsort</button>
