@@ -27,19 +27,13 @@ a {
     border-radius: 4px 4px 4px 4px;
 }
 
-li:hover {
+a:hover {
     font-size: larger;
     cursor: hand;
 }
-
 a.remove:hover {
     background-color: red;
     color: white;
-    cursor: hand;
-}
-
-a.badge:hover {
-    cursor: hand;
 }
 
 a.badge:active {
