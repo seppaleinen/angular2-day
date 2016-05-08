@@ -5,12 +5,17 @@ i komponenten. Vi kan även utföra routingen direkt i HTML-mallen.
 
 En annan viktig egenskap är att routern stödjer sub-routing, dvs 
 att man kan skapa en egen router för en delkomponent vilken hanterar
-routing inom lokalt.
+routing lokalt inom den delkomponenten med relativa URL:er.
 
 För att känna på det här ska vi dela in huvudvyn i två flikar
-- topplistevy, här visar vi topp-3
+- topplistevy, här visar vi topp-3 för ölsorterna
 - administration, här kan vi administrera ölsorterna (dvs samma innehåll
-  vi tidigare har haft i _AppComponent_)
+  vi tidigare har haft i _BeerListComponent_)
+
+Efter det här kan vi navigera enligt följande:
+
+Huvudvy -> Topplista
+        -> Administration <--> Detalj
 
 AppComponent
 ------------
@@ -48,6 +53,13 @@ export class AppComponent implements OnInit {
 
 Nu har vi bara en navigeringsrad som  leder till två subkomponenter.
 
+Navigering sker istället deklarativt med property-bindning till 
+`routerLink`.
+
+(Dessutom har vi en liten fudge för att fixa stöd för default-route.
+Routern i Angular 2 är f.n under omarbetning och detta stöd finns ännu 
+ej, men är på gång.)
+
 TopListComponent
 ----------------
 Vi lägger till topplistekomponenten, _./src/toplist/toplist.component.ts_
@@ -81,7 +93,7 @@ export class TopListComponent {
 
 BeerAdminComponent
 ------------------
-Och skapar _./src/beeradmin/beeradmin.component.ts_
+Och så skapar vi skapar _./src/beeradmin/beeradmin.component.ts_
 ```typescript
 import {Component} from "@angular/core";
 import {Routes, ROUTER_DIRECTIVES} from "@angular/router";
@@ -102,8 +114,16 @@ export class BeerAdminComponent {
 }
 ```
 
-Beeradmin skapar en underrouter som kommer att routa relativt sin 
-överordnade router, dvs lägga till ...
+I och med att vi deklarerar `@Routes` igen, skapar _BeerAdminComponent_
+en underrouter som kommer att routa relativt sin överordnade router, 
+dvs den relativa URL:en kommer att läggas till URL:en som överordnad 
+router ligger på. T.ex, i vårat fall kommer routen 
+`http://localhost:12380/beer-admin/` matcha under-routerns 
+route `/` och `http://localhost:12380/beer-admin/beer-details/3` 
+matchar `/beer-details/:id`.
+
+Detta är användbart för att bygga åternavändbara komponenter som skall 
+kunna pluggas in oberoende av överordnad URL-struktur.
 
 Fixa till _BeerListComponent_ och _BeerDetailsComponent_
 --------------------------------------------------------
@@ -113,13 +133,15 @@ ligger under en annan router.
 _BeerListComponent_
 ```typescript
 :
-    <a (click)="select(beer)">{{beer.name}}</a> <a class="danger remove" (click)="remove(beer)">[ta bort]</a>
+  <a (click)="select(beer)">{{beer.name}} ({{beer.id}})</a> <a class="danger remove" (click)="remove(beer)">[ta bort]</a>
+
 :
   select(beerToSelect) {
     this.router.navigate(['/beer-admin/beer-details', beerToSelect.id]);
   }
 :
 ```
+Observera att vi tagit bort `href="#` i `<a class="danger remove" ...`.
 
 _BeerDetailsComponent_
 ```typescript
@@ -130,52 +152,14 @@ _BeerDetailsComponent_
 :
 ```
 
-Sen lite styling på det:
-```css
-:
-a.remove:hover {
-    background-color: red;
-    color: white;
-    cursor: hand;
-}
-
-a.badge:hover {
-    cursor: hand;
-}
-
-a.badge:active {
-    background-color: #ff0430;
-}
-
-nav a {
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #7f7f7f;
-}
-nav a:visited, a:link {
-    color: #2c2c2c;
-}
-nav a:hover {
-    color: #101010;
-    background-color: #CFD8DC;
-}
-nav a.router-link-active {
-    color: #101010;
-    background-color: #c4c4c4;
-}
-:
-```
-
-Tja, nu ser det väl rätt OK ut?
-
+Tuta och kör!
 
 Vad har vi lärt oss?
 --------------------
+Vi lärde oss att använda deklarativ routing direkt i 
+HTML-mallen med `[routerLink]`.
 
-
-
-I
+Vi lärde oss även att skapa en relativ under-router 
+för en komponent.
 
 
