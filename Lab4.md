@@ -303,6 +303,7 @@ Vi använde routern i Angular 2. För det behövdes
 - `<router-outlet></router-outlet>` på det ställe där
   man vill att routern skall lägga in den komponent man
   routar till.
+- Vi definierar routes med `@Routes`  
 - Vi använde _Router_-tjänsten för att navigera.
 
 Mer finns att läsa i 
