@@ -12,6 +12,7 @@ npm-debug.log*
 dist/
 
 # Ignore dependency directories
+node/
 node_modules/
 typings/
 
