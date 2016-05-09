@@ -94,3 +94,24 @@ Typescript-kompilatorn är konfigurerad i `tsconfig.js`
 Typings är konfigurerad i `typings.json`
 Lite-server är konfigurerad i `lite-server.json`
 
+Installera lokal NodeJS med maven
+---------------------------------
+För den som vill installera en lokal NodeJS för projektet, så 
+finns en maven-pom med stöd för detta. Men det behövs normalt
+inte.
+
+Kör i så fall för att installera node
+
+    mvn package
+    
+Sedan kör man alla npm-kommandon med
+
+    ./node/npm <kommando>
+    
+t.ex
+    
+    ./node/npm install
+    ./node/npm run build
+    ./node/npm run dev-server
+    
+
