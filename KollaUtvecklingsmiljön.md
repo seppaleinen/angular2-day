@@ -1,7 +1,7 @@
 Kolla att utvecklingsmiljön funkar
 ==================================
 Detta är en minimal applikation med syfte att göra det 
-möjligt att kontrollera at utvecklingsmiljön fungerar.
+möjligt att kontrollera att utvecklingsmiljön fungerar.
 
 För att kolla att allt funkar, gör följande
 
