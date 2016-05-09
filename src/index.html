@@ -7,23 +7,30 @@
     <link rel="stylesheet" href="styles.css">
 
     <!-- 1. Ladda basbibliotek -->
-    <!-- Polyfill(s) för gamla webbläsare -->
+    <!-- Importera Polyfill(s) för gamla webbläsare -->
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
 
+    <!-- Importera Polyfills för Angular2 -->
+    <!-- Zone skapar exekveringskontext vilket används för att hålla data-bindingar i synk -->
     <script src="node_modules/zone.js/dist/zone.js"></script>
+    <!-- Används för att ge stöd för metadata reflection (decorators) -->
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
+
+    <!-- Importera SystemJS -->
     <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-    <!-- 2. Konfigurera SystemJS -->
+    <!-- 2. Konfigurera SystemJS med våran konfiguration -->
     <script src="systemjs.config.js"></script>
 
+    <!-- 3. Importera våran applikation, dvs SystemJS läser in allt
+            under ./ ('app' är mappat mot './')
+    -->
     <script>
-      // 3. Importera våran applikation
       System.import('app').catch(function(err){ console.error(err);  });
     </script>
   </head>
 
-  <!-- 4. Visa applikationen -->
+  <!-- 4. Visa applikationen genom att inkludera våran HTML-tagg -->
   <body>
     <my-app>Laddar...</my-app>
   </body>
