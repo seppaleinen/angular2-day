@@ -1,5 +1,5 @@
-Labb 3, hantera listor och skapa hierarkiaska komponenter
-=========================================================
+Labb 3, hantera listor och skapa hierarkiska komponenter
+========================================================
 
 Hittills har vi implementerat allt i våran _AppComponent_. 
 
