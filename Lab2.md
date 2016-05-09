@@ -118,7 +118,7 @@ Rent allmänt kommer det finnas följande sätt att binda data
 - från vy till datakälla (events) med `(<an event>)`; med det kan vi "fånga" events
 - 2-vägsdatabindning blir kombinationen av dessa, d.v.s `[()]`, vi både
   visar property samt uppdaterar propertyt när användaren gör ändringar.
-  Principen är att det mappar enligt följande:
+  Principen är att följande ekvivalens gäller:
   `[(x)]="myData" <==> [x]="myData" (xChange)="myData=$event"` 
   (för mer detaljer, se [2-vägsdatabindning med NgModel](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ngModel))
 
