@@ -1,4 +1,4 @@
-Labb 4, Services & Routing
+Labb 4: Services & Routing
 ==========================
 Nu har vi koll på hur vi kan bygga komponenter, samt sätta upp
 en hierarki av kommunicerande komponenter.
@@ -25,7 +25,7 @@ Innan vi börjar mecka med applikationskomponenterna ska vi få igång routern.
 
 ### Sätt base-href
 Det första vi skall göra för att få routing att fungera rätt är att
-lägga till följande i _./src/index.html_.
+lägga till följande i `./src/index.html`.
 ```html
 :
 <head>
@@ -53,7 +53,7 @@ med en mer produktionslik arkitektur. Vi vill inte ha våran datamodell
 liggande i komponenterna, så vi definierar en egen tjänst.
 
 ### BeerService
-Vi bryter ut en egen tjänst som håller våra ölsorter, _./src/beer/beer.service.ts_
+Vi bryter ut en egen tjänst som håller våra ölsorter, `./src/beer/beer.service.ts`
 ```typescript
 import { Injectable } from '@angular/core';
 import {Beer} from "./beer";
@@ -83,8 +83,8 @@ export class BeerService {
 }
 ```
 När vi bygger tjänster så behöver vi inte göra något annat än 
-att annotera med `@Injectable()`så att metadata genereras
-för Angular.
+att annotera med `@Injectable()` (återigen, tänk på paranteserna) 
+så att metadata genereras för Angular.
 
 Vi gör en fultjänst som inte på ett enkelt sätt kan 
 refaktoriseras till en riktig back-end-tjänst. För det
@@ -93,8 +93,8 @@ när vi ändrar i ölsorterna. Men vi komplicerar inte
 applikationen med de aspekterna i de här labbarna.
 
 ### Beer
-Vi flyttar dessutom in våran _./src/beerdetails/beer.ts_-klass 
-till _./src/beer/_-katalogen (kom ihåg att fixa importer i 
+Vi flyttar dessutom in våran `./src/beerdetails/beer.ts`-klass 
+till `./src/beer/`-katalogen (kom ihåg att fixa importer i 
 `beerdetails.component.ts` och `app.component.ts`).
  
 Dessutom lägger vi till ett `id`-fält på `Beer`-klassen
@@ -110,7 +110,7 @@ Dessutom lägger vi till ett `id`-fält på `Beer`-klassen
 ```
 
 ### BeerListComponent
-Vi bryter ut listan till en egen komponent, _./src/beerlist/beerlist.component.ts_
+Vi bryter ut listan till en egen komponent, `./src/beerlist/beerlist.component.ts`
 ```typescript
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
@@ -167,20 +167,19 @@ för att öppna detaljvyn.
 För att få tillgång till routern importerar vi den injicerar 
 vi den i konstruktorn.
 
-Vi injicerar även _BeerService_ i konstruktorn.
+Vi injicerar även `BeerService` i konstruktorn.
 
 Vi har ändrat på våran `select()`-metod, så att den nu
 använder routern för att navigera till detaljvyn.
 
-Övriga metoder använder _BeerService_ för att komma åt
+Övriga metoder använder `BeerService` för att komma åt
 ölsorterna.
 
 ### BeerDetailsComponent
-Vi refaktoriserar våran _BeerDetailsComponent_ och ersätter 
+Vi refaktoriserar våran `BeerDetailsComponent` och ersätter 
 property-bindning med att istället få _ID_ för vald ölsort 
-från routen och hämtar själva ölsorten från _BeerService_.
+från routen och hämtar själva ölsorten från `BeerService`.
  
-Vi modifierar _BeerDetailsComponent_
 ```typescript
 import {Component} from "@angular/core";
 import { OnActivate, Router, RouteSegment, RouteTree} from '@angular/router';
@@ -226,17 +225,17 @@ export class BeerDetailsComponent implements OnActivate {
   }
 }
 ```
-Återigen, vi injicerar _Router_ och _BeerService_.
+Återigen, vi injicerar `Route` och `BeerService`.
 
-Dessutom implementerar vi gränssnittet _OnActivate_ 
+Dessutom implementerar vi gränssnittet `OnActivate` 
 vilken definierar en metod, `routerOnActivate(...)`.
 Denna metod körs när våran komponent aktiveras som
 följd av att man navigerat till den. I den plockar
 vi ut _ID_ och hämtar specifik ölsort från
-_BeerService_.
+`BeerService`.
 
 ### AppComponent
-Till sist gör vi en total makeover på _AppComponent_.
+Till sist gör vi en total makeover på `AppComponent`.
 
 ```typescript
 import {Component} from "@angular/core";
@@ -272,8 +271,8 @@ Det är här routern kommer att lägga in den komponent
 men navigerar till. För att det skall fungera
 måste vi lägga till `directives: [ROUTER_DIRECTIVES]`.
 
-Vi deklararer `provider` för _BeerService_, vilket gör 
-att Angular förstår hur _BeerService_ skapas vid 
+Vi deklararer `provider` för `BeerService`, vilket gör 
+att Angular förstår hur `BeerService` skapas vid 
 injicering i konstruktorer. 
 En mycket viktig detalj är att vi endast deklarerar den
 på toppkomponenten. Samma tjänsteinstans ärvs sedan ner
@@ -288,7 +287,7 @@ Vi har konfigurerat routes med `@Routes`-dekoratorn:
 - när man navigerar till `http://localhost:12380/beer-details/3`
   kommer man till detaljvyn för ölsorten med ID=3
 
-Vi har injicerat in `Router`-servicen i våran _AppComponent_, 
+Vi har injicerat in `Router`-servicen i våran `AppComponent`, 
 men med lite alternativ syntax, fältet router skapas 
 automatiskt i och med att det är ett konstruktor-argument.
 
