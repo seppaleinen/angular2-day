@@ -1,5 +1,5 @@
-Lab2, en- och två-vägsdatabindning
-==================================
+Labb 2: en- och två-vägsdatabindning
+====================================
 
 OK, nu har vi fått igång Angular 2 och vi kan utveckla och lägga till
 ändringar och allt uppdateras automagiskt.
@@ -20,7 +20,7 @@ Uppdatera vyn från komponentklassen
 I det första exemplet börjar vi med att låta en komponentklassen
 dynamiskt uppdatera sin tillhörande vy.
 
-Vi gör det genom att lägga till en räknare i våran _AppComponent_:
+Vi gör det genom att lägga till en räknare i våran `AppComponent:
 
 ```typescript
 @Component({
@@ -48,7 +48,7 @@ export class AppComponent {
 Observera att HTML-mallen ändrades så att den kunde spänna över flera rader
 genom att använda _backtick_ ( ` ) istället för _single quote_ ( ' ).
 
-Sådär, då ska vi ha en rad `Sekunder sedan start: nnn s` i vyn.
+Sådär, då ska vi ha en rad __Sekunder sedan start: nnn s__ i vyn.
 
 Gamla hederliga `{{}}-interpoleringen funkar som vanligt!
 
@@ -60,7 +60,7 @@ Hur är det då med input?
 När vi ska få in data från vyn, typiskt i en input, blir det lite annorlunda
 än förut.
 
-Vi bygger vidare på våran _AppComponent_ och lägger till lite inputs.
+Vi bygger vidare på våran `AppComponent` och lägger till lite inputs.
 
 ```typescript
 import { Component } from '@angular/core';
@@ -103,7 +103,7 @@ export class AppComponent {
 }
 ```
 
-OK, vad var det där med `[(ngModel)]="beer" nu då?
+OK, vad var det där med `[(ngModel)]="beer"` nu då?
 
 Det är den nya syntaxen för 2-vägsdatabindning.
 
@@ -116,7 +116,11 @@ på vad Angular-gänget har hittat på egentligen.
 Rent allmänt kommer det finnas följande sätt att binda data
 - från datakälla till vy med `[<a property>]`; med det kan vi sätta properties
 - från vy till datakälla (events) med `(<an event>)`; med det kan vi "fånga" events
-- 2-vägsdatabindning blir kombinationen av dessa, d.v.s `[()]`, logiskt eller hur?
+- 2-vägsdatabindning blir kombinationen av dessa, d.v.s `[()]`, vi både
+  visar property samt uppdaterar propertyt när användaren gör ändringar.
+  Principen är att följande ekvivalens gäller:
+  `[(x)]="myData" <==> [x]="myData" (xChange)="myData=$event"` 
+  (för mer detaljer, se [2-vägsdatabindning med NgModel](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ngModel))
 
 Hmm, men vad är det här med _properties_ och _events_?
 
@@ -135,7 +139,7 @@ Angular utnyttjar även DOM-properties för att skapa "kanaler" mellan komponent
 komponent-properties och direktiv-properties.
 
 ### Events
-När vi talar om _events_ är det i grunden DOM-events vi pratar om, t.ex onclick,  
+När vi talar om _events_ är det i grunden DOM-events vi pratar om, t.ex _onclick_,
 men även här utökar Angular modellen att även innefatta komponent- och direktiv-
 events.
 
@@ -169,13 +173,13 @@ Samt en metod i våran komponent-klass
   :
 ```
 
-Här har vi bundit event-typen _click_ till våran metod _AppComponent.clear()_.
+Här har vi bundit event-typen _click_ till våran metod `AppComponent.clear()`.
 
 Property-bindning
 -----------------
 Vi vill inaktivera knappen om inget data är inmatat.
 
-Vi bygger vidare på våran _AppComponent_ och lägger till en knapp i våran HTML-mall.
+Vi bygger vidare på våran `AppComponent` och lägger till en knapp i våran HTML-mall.
 
 ```typescript
 :
@@ -195,7 +199,7 @@ Samt en metod i våran komponent-klass
 ```
 
 Här har vi bundit _button_-elementets property _disabled_ till våran metod
-_AppComponent.isEmpty()_
+`AppComponent.isEmpty()`.
 
 Vad har vi lärt oss?
 --------------------
@@ -210,7 +214,8 @@ Vi kan även skicka events från DOM till komponentklass vidare
 - event-bindningar, `()`
 
 Och vi kan kombinera dessa 
-- 2-vägsbindning, `[()]`
+- 2-vägsbindning, `[()]`, med ekvivalensen 
+  `[(x)]="myData" <==> [x]="myData" (xChange)="myData=$event"` 
 
 
 Cool, vi börjar få lite kläm på hur data flyter fram och tillbaka mellan våran
