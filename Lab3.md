@@ -1,7 +1,7 @@
-Labb 3: Hantera listor och skapa hierarkiska komponenter
+Labb 3, hantera listor och skapa hierarkiska komponenter
 ========================================================
 
-Hittills har vi implementerat allt i våran `AppComponent`. 
+Hittills har vi implementerat allt i våran _AppComponent_. 
 
 Det kan vi såklart inte fortsätta med. Vi villl bryta upp applikationen
 i komponenter med hög kohesion och låg koppling enligt gamla beprövade
@@ -16,9 +16,9 @@ Desutom skall man kunna markera en ölsort i listan och uppdatera den.
 Refaktorisera
 -------------
 
-Vi börjar med att refaktorisera `AppComponent`. 
+Vi börjar med att refaktorisera _AppComponent_. 
 
-Bryt ut en egen klass som vi lägger i `./src/beerdetails/beer.ts` 
+Bryt ut en egen klass som vi lägger i _./src/beerdetails/beer.ts_ 
 för att hålla information om ölsört
 
 ```typescript
@@ -33,7 +33,7 @@ export class Beer {
 }
 ```
 
-Rensa upp i `AppComponent` och ta bort gamla ölburkar, men lägg till
+Rensa upp i _AppComponent_ och ta bort gamla ölburkar, men lägg till
 lite nytt...
 
 ```typescript
@@ -46,8 +46,7 @@ import {Beer} from "./beerdetails/beer";
 <h2>Öllistan</h2>
 <ol>
   <li *ngFor="let beer of beers">
-    <a href="#">{{beer.name}}</a> 
-    <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
+    <a href="#">{{beer.name}}</a> <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
   </li>
 </ol>
 <button type="button" (click)="addBeer()">Lägg till ölsort</button>
@@ -71,25 +70,17 @@ export class AppComponent {
   }
 }
 ```
-I komponentklassen har vi rensat bort Lab1-detaljer och lagt till 
-en lista med ölsorter, `beers`, samt metoder för att ta bort och lägga
-till ölsorter.
 
-I HTML-mallen har vi nu en knapp för att lägga till ölsort till 
-listan `beers`.
+Vi har lagt till en knapp för att lägga till ölsort till listan _beers_.
 
 Vi stoppade även in ett gammalt Angular-direktiv i ny skepnad
 `*ngFor="let beer in beers"`. Den känner vi igen som direktivet som 
 används för att repetera element baserat på en underliggande lista.
-
-Vi repeterar över `beers` och lägger upp en rad med två `<a>`-element.
-Den ena för att visa ölsort som länk (ej bunden till action än), 
-den andra för att ta bort ölsort, bunden till `AppComponent.remove(beerToRemove)`.
  
 Men vad menas med den nya syntaxen?
 
 Den första biten är "let beer in beers". Där har vi liksom i
-Angular 1.x ett eget mikro-språk specifikt för `ngFor`.
+Angular 1.x ett eget mikro-språk specifikt för _ngFor_.
 
 Däremot är `*` generellt och används som syntaktisk socker i alla 
 direktiv där man definierar en mall som skall ersätta HTML-taggen där 
@@ -97,12 +88,12 @@ direktivet skall användas.
 
 Ett klumpigare sätt att uttrycka samma sak med vanlig property-bindning
 och Angulars template-direktiv visas enklast genom att expandera Angulars
-`ngIf`-direktiv (jepp, samma funktion som ng-if i Angular 1.x) är:
+ngIf-direktiv (jepp, samma funktion som ng-if) är:
 ```html
 <p *ngIf="true">Banan</p>
 ```
 
-Med `template`-direktivet:
+Med _template_-direktivet:
 ```html
 <p template="ngIf:true">Banan</p>
 ```
@@ -123,7 +114,7 @@ OK, vi kör vidare och skapar en komponent för öldetaljer.
 Nu ska vi skapa en komponent där man kan redigera detaljer om en ölsort.
 
 Vi tar delar från det vi implementerade i Labb 2 och skapar följande
-komponent i `./src/beerdetails/beerdetails.component.ts`:
+komponent:
 
 ```typescript
 import {Component} from "@angular/core";
@@ -149,7 +140,7 @@ export class BeerDetailsComponent {
 
 ```
 
-Samt ändra `AppComponent`:
+Samt ändra _AppComponent_:
 ```typescript
 :
 import {BeerDetailsComponent} from "./beerdetails/beerdetails.component"
@@ -162,26 +153,21 @@ import {BeerDetailsComponent} from "./beerdetails/beerdetails.component"
 
 <my-beer-details *ngIf="selectedBeer"></my-beer-details>
 :
-  selectedBeer: Beer = beers[0];
-:
 ```
 
-Notera att vi måste deklarera att vi använder komponenten `my-beer-details` med 
-`directives: [BeerDetailsComponent]`. 
-
-Vi använder direktivet `ngIf` för att styra huruvida detaljerna skall 
-visas eller ej.
+Vi måste deklarera att vi använder komponenten `my-beer-details` med 
+`directives: [BeerDetailsComponent]`
+Vi använder direktivet _ngIf_ för att styra om detaljerna skall visas.
 
 OK, det funkar, men nu ska vi ta bort de hårdkodade värdena.
 
 Parametrisera komponent med @Input och property-bindning
 --------------------------------------------------------
 
-Först ser vi till att man kan välja vad som skall visas i `AppComponent`:
+Först ser vi till att man kan välja vad som skall visas i _AppComponent_:
 ```typescript
 :
-    <a href="#" (click)="select(beer)">{{beer.name}}</a> 
-    <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
+    <a href="#" (click)="select(beer)">{{beer.name}}</a> <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
 :
   selectedBeer: Beer;
 :
@@ -192,10 +178,10 @@ Först ser vi till att man kan välja vad som skall visas i `AppComponent`:
 ```
 
 Sedan måste vi få in information om vilken ölsort som valts till 
-`BeerDetailsComponent`. I Angular 2 gör man det genom att först deklarera
-att fältet `BeerDetailsComponent.beer` är ett property som kan ta emot 
+_BeerDetailsComponent_. I Angular 2 gör man det genom att först deklarera
+att fältet _BeerDetailsComponent.beer_ är ett property som kan ta emot 
 data via property-bindning. Detta gör man genom att annotera 
-`beer`-fältet med `@Input()` (OBS, paranteserna är viktiga!):
+_beer_-fältet med \@Input:
  
 ```typescript
 export class BeerDetailsComponent {
@@ -205,34 +191,34 @@ export class BeerDetailsComponent {
 ```
 
 Nu kan vi lägga på property-bindningen i HTML-elementet där komponenten 
-används i HTML-mallen för `AppComponent` och på det sättet binda ihop
-`AppComponent.selectedBeer` med `BeerDetailsComponent.beer`:
+används i HTML-mallen för _AppComponent_ och på det sättet binda ihop
+_AppComponent.selectedBeer_ med _BeerDetailsComponent.beer_:
 ```typescript
 :
 <my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer"></my-beer-details>
 :
 ```
 
-Och nu öppnas detaljvyn när man klickar på en ölsort i listan.
+Och _BAM!_ nu öppnas detaljvyn när man klickar på en ölsort i listan.
 
-Nu ska vi få komponenten att ge ifrån sig lite events oxå.
+Nu, ska vi få komponenten att ge ifrån sig lite events oxå.
 
 Komponentspecifika events
 -------------------------
-Nu ska vi lägga till en gilla-knapp i `BeerDetailsComponent`. När man gillar en ölsort så 
+Nu ska lägga till en gilla-knapp i _BeerDetailsComponent_. När man gillar en ölsort så 
 inkrementeras en poängräknare och dessutom skickas ett event till eventuella lyssnare.
 
-Vi sätter upp `AppComponent` att lyssna på dessa events och sortera om öllistan när 
+Vi sätter upp _AppComponent_ att lyssna på dessa events och sortera om öllistan när 
 de kommer.
 
-Vi börjar med att lägga till poäng i `./src/beerdetails/beer.ts`:
+Vi börjar med att lägga till poäng i _./src/beerdetails/beer.ts_:
 ```typescript
 :
 points:number
 :
 ```
 
-Sedan lägger vi till gilla-knapp och event-emitter i `./src/beerdetails/beerdetails.component.ts`:
+Sedan lägger vi till gilla-knapp och event-emitter i _./src/beerdetails/beerdetails.component.ts_:
 ```typescript
 import {Component, Input, EventEmitter} from "@angular/core";
 :
@@ -248,17 +234,17 @@ import {Component, Input, EventEmitter} from "@angular/core";
 :
 ```
 
-Här används dekoratorn `@Output()` för att markera att ett fält är en output-property man
-kan binda emot. Denna är implementerad med `EventEmitter` vilken används för att skicka
-events. Fältnamnet (i detta fall `updated`) blir det event man kan binda emot.
+Här används dekoratorn `@Output` för att markera att ett fält är en output-property man
+kan binda emot. Denna är implementerad med `ÈventEmitter` vilken används för att skicka
+events. Fältnamnet blir det event man kan binda emot.
 
 I våran `like()`-metod anropar vi `EventEmitter.emit()`för att skicka eventet.
 
-Till sist sätter vi upp en event-bindning i `AppComponent` så att vi kan lyssna på
+Till sist sätter vi upp en event-bindning i _AppComponent_ så att vi kan lyssna på
 _update_-events.
 ```typescript
 :
-<li *ngFor="let beer of beers"><span class="badge">{{beer.points}}</span>
+<li *ngFor="let beer of beers" [class.selected]="isSelected(beer)"><span class="badge">{{beer.points}}</span>
 :
 <my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (update)="beerUpdated($event)"></my-beer-details>
 :
@@ -286,9 +272,7 @@ export class AppComponent {
 ```
 
 Och så fixar vi styling så att vald ölsort markeras i listan med 
-property-bindning för _class_ (inbyggd property-bindning motsvarande 
-ng-class i Angular 1.x, CSS-klassen `selected` aktiveras om uttrycket 
-är sant).
+property-bindning för _class_.
 
 Sen uppdaterar vi _AppComponent_:
 ```typescript
