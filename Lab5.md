@@ -14,8 +14,8 @@ För att känna på det här ska vi dela in huvudvyn i två flikar
 
 Efter det här kan vi navigera enligt följande:
 
-Huvudvy -> Topplista
-        -> Administration <--> Detalj
+    Huvudvy -> Topplista
+            -> Administration <--> Detalj
 
 AppComponent
 ------------
