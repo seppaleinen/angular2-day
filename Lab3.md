@@ -83,8 +83,7 @@ Den första biten är "let beer in beers". Där har vi liksom i
 Angular 1.x ett eget mikro-språk specifikt för _ngFor_.
 
 Däremot är `*` generellt och används som syntaktisk socker i alla 
-direktiv där man definierar en mall som skall ersätta HTML-taggen där 
-direktivet skall användas. 
+direktiv där direktivet tar en mall och gör något med den. 
 
 Ett klumpigare sätt att uttrycka samma sak med vanlig property-bindning
 och Angulars template-direktiv visas enklast genom att expandera Angulars
