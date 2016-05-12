@@ -106,12 +106,26 @@ Kör i så fall för att installera node
     
 Sedan kör man alla npm-kommandon med
 
-    ./node/npm <kommando>
+    PATH=$PATH:./node && ./node/npm <kommando>
     
 t.ex
     
-    ./node/npm install
-    ./node/npm run build
-    ./node/npm run dev-server
+    PATH=$PATH:./node && ./node/npm install
+    PATH=$PATH:./node && ./node/npm run build
+    PATH=$PATH:./node && ./node/npm run dev-server
+    
+Problem på Ubuntu
+-----------------
+I Ubuntu 14 och 16 saknas minne för att watchern ska kunna köra. Fixa genom att lägga till
+
+    fs.inotify.max_user_watches = 524288 
+
+i filen
+
+    /etc/sysctl.conf
+
+och läs in med
+
+    sudo sysctl -p
     
 
