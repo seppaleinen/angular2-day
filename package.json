@@ -10,7 +10,7 @@
     "clean": "rm -rf ./dist",
     "build": "npm run cpx && concurrently \"npm run cpx-node\" \"npm run tsc\"",
     "dev-server": "tsc && concurrently \"npm run cpx:w\" \"npm run tsc:w\" \"npm run lite\"",
-    "lite": "lite-server -c lite-server.json",
+    "lite": "./node_modules/.bin/lite-server -c lite-server.json",
     "cpx": "./node_modules/.bin/cpx \"src/**/*.{js,ts,html,png,jpg,css}\" dist --verbose",
     "cpx:w": "./node_modules/.bin/cpx \"src/**/*.{js,ts,html,png,jpg,css}\" dist --verbose --watch",
     "cpx-node": "./node_modules/.bin/cpx \"node_modules/**/*.*\" dist/node_modules --verbose",
