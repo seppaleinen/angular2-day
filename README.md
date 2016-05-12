@@ -114,6 +114,8 @@ t.ex
     PATH=$PATH:./node && ./node/npm run build
     PATH=$PATH:./node && ./node/npm run dev-server
     
+Problem på Ubuntu
+-----------------
 I Ubuntu 14 och 16 saknas minne för att watchern ska kunna köra. Fixa genom att lägga till
 
     fs.inotify.max_user_watches = 524288 
