@@ -79,7 +79,7 @@ används för att repetera element baserat på en underliggande lista.
  
 Men vad menas med den nya syntaxen?
 
-Den första biten är "let beer in beers". Där har vi liksom i
+Den första biten är "let beer of beers". Där har vi liksom i
 Angular 1.x ett eget mikro-språk specifikt för _ngFor_.
 
 Däremot är `*` generellt och används som syntaktisk socker i alla 
