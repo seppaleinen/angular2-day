@@ -1,0 +1,16 @@
+<h2>Öllistan</h2>
+<ol>
+    <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)">
+        <span class="badge">{{beer.points}}</span>
+        <a href="#" (click)="select(beer)">{{beer.name}}</a>
+        <a class="danger" href="#" (click)="remove(beer)">[ta bort]</a>
+    </li>
+</ol>
+<button type="button" (click)="addBeer()">Lägg till ölsort</button>
+
+<hr>
+
+<my-beer-details
+        *ngIf="selectedBeer"
+        [beer]="selectedBeer"
+        (update)="beerUpdated($event)"></my-beer-details>
