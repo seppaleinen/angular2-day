@@ -41,6 +41,7 @@ Men det räcker inte, vi måste även ange _providers_ för `Router`-servicen.
 
 Det gör vi i bootstrappen, _./src/main.ts_
 ```typescript
+import {ROUTER_PROVIDERS} from "@angular/router";
 :
 bootstrap(AppComponent, [ROUTER_PROVIDERS]);
 :
