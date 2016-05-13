@@ -79,7 +79,7 @@ används för att repetera element baserat på en underliggande lista.
  
 Men vad menas med den nya syntaxen?
 
-Den första biten är "let beer in beers". Där har vi liksom i
+Den första biten är "let beer of beers". Där har vi liksom i
 Angular 1.x ett eget mikro-språk specifikt för _ngFor_.
 
 Däremot är `*` generellt och används som syntaktisk socker i alla 
@@ -219,7 +219,7 @@ points:number
 
 Sedan lägger vi till gilla-knapp och event-emitter i _./src/beerdetails/beerdetails.component.ts_:
 ```typescript
-import {Component, Input, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 :
 <button type="button" (click)="like()">Yep, den är smarrig!</button>
 :
@@ -228,7 +228,7 @@ import {Component, Input, EventEmitter} from "@angular/core";
   
   like() {
     this.beer.points++;
-    this.updated.emit(beer);
+    this.updated.emit(this.beer);
   }
 :
 ```
@@ -245,7 +245,7 @@ _update_-events.
 :
 <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)"><span class="badge">{{beer.points}}</span>
 :
-<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (update)="beerUpdated($event)"></my-beer-details>
+<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (updated)="beerUpdated($event)"></my-beer-details>
 :
 beerUpdated(event) {
   this.beers = this.beers.sort((b1, b2) => b2.points - b1.points);

@@ -4,12 +4,13 @@ Detta är en minimal applikation med syfte att göra det
 möjligt att kontrollera att utvecklingsmiljön fungerar.
 
 För att kolla att allt funkar, gör följande
-
 - Installera NodeJS 6.0.0
 - Kör sedan
-    
-    npm install
-    npm run dev-server
+
+    ```bash
+    $ npm install
+    $ npm run dev-server
+    ```
     
 OS:ets standard-webbläsare skall öppna en flik på http://localhost:12380/.
 
