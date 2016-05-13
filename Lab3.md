@@ -245,7 +245,7 @@ _update_-events.
 :
 <li *ngFor="let beer of beers" [class.selected]="isSelected(beer)"><span class="badge">{{beer.points}}</span>
 :
-<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (update)="beerUpdated($event)"></my-beer-details>
+<my-beer-details *ngIf="selectedBeer" [beer]="selectedBeer" (updated)="beerUpdated($event)"></my-beer-details>
 :
 beerUpdated(event) {
   this.beers = this.beers.sort((b1, b2) => b2.points - b1.points);
