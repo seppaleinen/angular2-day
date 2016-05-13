@@ -219,7 +219,7 @@ points:number
 
 Sedan lägger vi till gilla-knapp och event-emitter i _./src/beerdetails/beerdetails.component.ts_:
 ```typescript
-import {Component, Input, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 :
 <button type="button" (click)="like()">Yep, den är smarrig!</button>
 :
@@ -228,7 +228,7 @@ import {Component, Input, EventEmitter} from "@angular/core";
   
   like() {
     this.beer.points++;
-    this.updated.emit(beer);
+    this.updated.emit(this.beer);
   }
 :
 ```
